@@ -16,11 +16,14 @@ if "cart" not in st.session_state:
     st.session_state["cart"] = pd.DataFrame(columns=["category","product","price","qty","subtotal"])
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(page_title="Baba Sales Shop", page_icon="🛍️", layout="wide")
+st.set_page_config(page_title="Baba Product Shop", page_icon="🛍️", layout="wide")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown("""
-<style>
+ <style>
+* {
+    box-sizing: border-box;
+}
 body {
     background-color: #f4f7fb;
     font-family: 'Segoe UI', sans-serif;
@@ -30,7 +33,7 @@ h1 {
     color:white;
     padding:18px;
     border-radius:15px;
-    background: linear-gradient(90deg, #4CAF50, #2E7D32);
+    background: linear-gradient(90deg, #2196F3, #1565C0); /* blue gradient */
     box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
 .product-card {
@@ -39,7 +42,11 @@ h1 {
     padding:12px;
     margin-bottom:10px;
     background:white;
+    color: #222;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 button[kind="primary"] {
     background: linear-gradient(90deg,#43A047,#1B5E20) !important;
@@ -49,7 +56,7 @@ button[kind="primary"] {
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1>🛍️ Baba Sales - Online Shop</h1>", unsafe_allow_html=True)
+st.markdown("<h1>🛍️ Baba Product - Online Shop</h1>", unsafe_allow_html=True)
 
 # -------------------- PRODUCTS TABS --------------------
 categories = list(products["category"].unique())
@@ -120,7 +127,7 @@ if not st.session_state["cart"].empty:
 
     if st.button("🗑️ Clear cart"):
         st.session_state["cart"] = pd.DataFrame(columns=["category","product","price","qty","subtotal"])
-        st.rerun()
+        st.experimental_rerun()
 else:
     st.info("Add products to the cart from the tabs above.")
 
